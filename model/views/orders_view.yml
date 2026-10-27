@@ -1,0 +1,25 @@
+views:
+  - name: orders_view
+    title: Orders
+
+    cubes:
+      - join_path: fact_orders
+        includes: "*"
+
+      - join_path: fact_orders.dim_customer
+        prefix: true
+        includes: "*"
+        excludes:
+          - count
+
+      - join_path: fact_orders.dim_product
+        prefix: true
+        includes: "*"
+        excludes:
+          - count
+
+      - join_path: fact_orders.dim_shipper
+        prefix: true
+        includes: "*"
+        excludes:
+          - count

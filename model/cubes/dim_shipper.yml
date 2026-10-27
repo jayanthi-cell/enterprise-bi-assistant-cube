@@ -1,0 +1,22 @@
+cubes:
+  - name: dim_shipper
+    sql_table: enterprise_ai.gold.dim_shipper
+    public: false
+
+    dimensions:
+      - name: shipper_id
+        sql: shipper_id
+        type: string
+        primary_key: true
+
+      - name: shipper_name
+        sql: shipper_name
+        type: string
+
+      - name: shipper_contact_details
+        sql: shipper_contact_details
+        type: string
+
+    measures:
+      - name: count
+        type: count

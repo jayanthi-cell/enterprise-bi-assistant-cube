@@ -1,0 +1,87 @@
+cubes:
+  - name: fact_orders
+    sql_table: enterprise_ai.gold.fact_orders
+    public: false
+
+    joins:
+      - name: dim_customer
+        sql: "{CUBE}.customer_id = {dim_customer}.customer_id"
+        relationship: many_to_one
+
+      - name: dim_product
+        sql: "{CUBE}.product_id = {dim_product}.product_id"
+        relationship: many_to_one
+
+      - name: dim_shipper
+        sql: "{CUBE}.shipper_id = {dim_shipper}.shipper_id"
+        relationship: many_to_one
+
+    dimensions:
+      - name: order_id
+        sql: order_id
+        type: string
+        primary_key: true
+
+      - name: order_date
+        sql: order_date
+        type: time
+
+      - name: ship_date
+        sql: ship_date
+        type: time
+
+      - name: ship_mode
+        sql: ship_mode
+        type: string
+
+      - name: shipping
+        sql: shipping
+        type: string
+        title: Shipping Method
+
+      - name: customer_feedback
+        sql: customer_feedback
+        type: string
+
+      - name: quarter_number
+        sql: quarter_number
+        type: number
+
+      - name: unit_price
+        sql: vehicle_price
+        type: number
+
+    measures:
+      - name: order_count
+        type: count
+        drill_members: [order_id, order_date, ship_mode, customer_feedback]
+
+      - name: total_quantity
+        sql: quantity
+        type: sum
+        drill_members: [order_id, order_date, ship_mode, customer_feedback]
+
+      - name: gross_revenue
+        sql: gross_revenue
+        type: sum
+        drill_members: [order_id, order_date, ship_mode, customer_feedback]
+
+      - name: net_revenue
+        sql: net_revenue
+        type: sum
+        drill_members: [order_id, order_date, ship_mode, customer_feedback]
+
+      - name: discount_amount
+        sql: discount_amount
+        type: sum
+        drill_members: [order_id, order_date, ship_mode, customer_feedback]
+
+      - name: avg_discount
+        sql: discount
+        type: avg
+        format: percent
+
+      - name: avg_shipping_lead_time_days
+        sql: shipping_lead_time_days
+        type: avg
+        title: Avg Shipping Lead Time (Days)

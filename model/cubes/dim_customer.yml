@@ -1,0 +1,42 @@
+cubes:
+  - name: dim_customer
+    sql_table: enterprise_ai.gold.dim_customer
+    public: false
+
+    dimensions:
+      - name: customer_id
+        sql: customer_id
+        type: string
+        primary_key: true
+
+      - name: customer_name
+        sql: customer_name
+        type: string
+
+      - name: gender
+        sql: gender
+        type: string
+
+      - name: job_title
+        sql: job_title
+        type: string
+
+      - name: city
+        sql: city
+        type: string
+
+      - name: state
+        sql: state
+        type: string
+
+      - name: country
+        sql: country
+        type: string
+
+      - name: postal_code
+        sql: postal_code
+        type: string
+
+    measures:
+      - name: count
+        type: count
