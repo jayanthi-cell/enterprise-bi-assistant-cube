@@ -1,8 +1,11 @@
 views:
   - name: orders_view
     title: Orders
+<<<<<<< HEAD
+=======
 
    
+>>>>>>> origin/master
     cubes:
       - join_path: fact_orders
         includes: "*"
