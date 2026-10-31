@@ -2,7 +2,9 @@ cubes:
   - name: fact_orders
     sql_table: enterprise_ai.gold.fact_orders
     public: false
-
+    title: Orders
+    description: Vehicle order transactions with revenue and shipping details.
+    
     joins:
       - name: dim_customer
         sql: "{CUBE}.customer_id = {dim_customer}.customer_id"
@@ -56,22 +58,22 @@ cubes:
         type: count
         drill_members: [order_id, order_date, ship_mode, customer_feedback]
 
-      - name: total_quantity
+      - name: total_quantity_sold
         sql: quantity
         type: sum
         drill_members: [order_id, order_date, ship_mode, customer_feedback]
 
-      - name: gross_revenue
+      - name: total_gross_revenue
         sql: gross_revenue
         type: sum
         drill_members: [order_id, order_date, ship_mode, customer_feedback]
 
-      - name: net_revenue
+      - name: total_net_revenue
         sql: net_revenue
         type: sum
         drill_members: [order_id, order_date, ship_mode, customer_feedback]
 
-      - name: discount_amount
+      - name: total_discount_amount
         sql: discount_amount
         type: sum
         drill_members: [order_id, order_date, ship_mode, customer_feedback]
@@ -85,3 +87,8 @@ cubes:
         sql: shipping_lead_time_days
         type: avg
         title: Avg Shipping Lead Time (Days)
+
+      - name: average_order_value
+        sql: "{total_net_revenue} / NULLIF({order_count}, 0)"
+        type: number
+        title: Average Order Value  

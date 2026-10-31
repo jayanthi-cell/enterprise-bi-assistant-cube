@@ -3,6 +3,11 @@ cubes:
     sql_table: enterprise_ai.gold.dim_product
     public: false
 
+    joins:
+      - name: fact_orders
+        sql: "{CUBE}.product_id = {fact_orders}.product_id"
+        relationship: one_to_many
+
     dimensions:
       - name: product_id
         sql: product_id

@@ -3,6 +3,11 @@ cubes:
     sql_table: enterprise_ai.gold.dim_customer
     public: false
 
+    joins:
+      - name: fact_orders
+        sql: "{CUBE}.customer_id = {fact_orders}.customer_id"
+        relationship: one_to_many
+        
     dimensions:
       - name: customer_id
         sql: customer_id
