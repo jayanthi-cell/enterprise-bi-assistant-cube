@@ -2,6 +2,7 @@ views:
   - name: orders_view
     title: Orders
 
+   
     cubes:
       - join_path: fact_orders
         includes: "*"
